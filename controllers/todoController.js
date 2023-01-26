@@ -24,6 +24,19 @@ const getTodo = async (req, res) => {
 
 const createTodo = async (req, res) => {
   const { title, body, urgency } = req.body
+
+  let emptyFields = []
+
+  if (!title) {
+    emptyFields.push('title')
+  }
+  if (!body) {
+    emptyFields.push('body')
+  }
+  if (emptyFields.length > 0) {
+    return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
+  }
+
   try {
     const todo = await Todo.create({ title, body, urgency })
     res.status(200).json(todo)
