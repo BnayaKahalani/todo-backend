@@ -2,7 +2,10 @@ const Todo = require('../models/todoModel')
 const mongoose = require('mongoose')
 
 const getTodos = async (req, res) => {
-  const todos = await Todo.find({}).sort({ createdAt: -1 })
+
+  const user_id = req.user._id
+
+  const todos = await Todo.find({ user_id }).sort({ createdAt: -1 })
   res.status(200).json(todos)
 }
 
