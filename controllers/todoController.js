@@ -38,7 +38,8 @@ const createTodo = async (req, res) => {
   }
 
   try {
-    const todo = await Todo.create({ title, body, urgency })
+    const user_id = req.user._id
+    const todo = await Todo.create({ title, body, urgency, user_id })
     res.status(200).json(todo)
   } catch (error) {
     res.status(400).json({ error: error.message })
