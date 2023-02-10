@@ -1,4 +1,5 @@
 const User = require('../models/userModel')
+const UserSetting = require('../models/userSettingModel')
 const jwt = require('jsonwebtoken')
 
 const createToken = (_id) => {
@@ -33,7 +34,12 @@ const signupUser = async (req, res) => {
   }
 }
 
+const changeFavTeam = async (req, res) => {
+
+}
+
 module.exports = {
   loginUser,
-  signupUser
+  signupUser,
+  changeFavTeam,
 }
