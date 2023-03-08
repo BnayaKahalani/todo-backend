@@ -10,6 +10,10 @@ const userSettingSchema = new Schema({
   favoriteTeam: {
     type: String,
     required: true,
+  },
+  darkMode: {
+    type: Boolean,
+    required: true,
   }
 })
 
