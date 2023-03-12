@@ -26,7 +26,7 @@ const getTodo = async (req, res) => {
 }
 
 const createTodo = async (req, res) => {
-  const { title, body, urgency } = req.body
+  const { title, body, crossedOut } = req.body
 
   let emptyFields = []
 
@@ -42,7 +42,7 @@ const createTodo = async (req, res) => {
 
   try {
     const user_id = req.user._id
-    const todo = await Todo.create({ title, body, urgency, user_id })
+    const todo = await Todo.create({ title, body, crossedOut, user_id })
     res.status(200).json(todo)
   } catch (error) {
     res.status(400).json({ error: error.message })
@@ -85,10 +85,20 @@ const updateTodo = async (req, res) => {
   res.status(200).json(todo)
 }
 
+const crossOutTodo = async (req, res) => {
+  const { id } = req.params
+
+  Todo.updateOne({ _id: id }, { $set: { crossedOut: { $not: "$crossedOut" } } }, (err, res) => {
+    if (err) throw err;
+    console.log(res);
+  })
+}
+
 module.exports = {
   getTodos,
   getTodo,
   createTodo,
   deleteTodo,
-  updateTodo
+  updateTodo,
+  crossOutTodo,
 }

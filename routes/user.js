@@ -9,5 +9,4 @@ router.post('/signup', signupUser)
 
 router.post('/user-settings',)
 
-
 module.exports = router

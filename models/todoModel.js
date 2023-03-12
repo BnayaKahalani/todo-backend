@@ -11,9 +11,10 @@ const todoSchema = new Schema({
     type: String,
     required: true,
   },
-  urgency: {
-    type: Number,
-    required: false,
+  crossedOut: {
+    type: Boolean,
+    default: false,
+    required: true,
   },
   user_id: {
     type: String,
