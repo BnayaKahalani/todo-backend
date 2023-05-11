@@ -68,31 +68,25 @@ const deleteTodo = async (req, res) => {
 const updateTodo = async (req, res) => {
   const { id } = req.params
 
-  console.log('req.body', req.body)
+  console.log('req.body:', req.body)
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: 'No such todo' })
+    return res.status(404).json({ error: 'Not valid ID' })
   }
 
-  const todo = await Todo.findByIdAndUpdate({ _id: id }, req.body)
-
-  console.log('updatedTodo', todo)
-
-  if (!todo) {
-    return res.status(404).json({ error: 'No such todo' })
-  }
-
-  res.status(200).json(todo)
+  const todo = await Todo.findOneAndUpdate({ _id: id }, { $set: { ...req.body } },)
+  const [updatedTodo,] = await Todo.find({ _id: id })
+  res.status(200).json(updatedTodo)
 }
 
-const crossOutTodo = async (req, res) => {
-  const { id } = req.params
+// const crossOutTodo = async (req, res) => {
+//   const { id } = req.params
 
-  Todo.updateOne({ _id: id }, { $set: { crossedOut: { $not: "$crossedOut" } } }, (err, res) => {
-    if (err) throw err;
-    console.log(res);
-  })
-}
+//   Todo.updateOne({ _id: id }, { $set: { crossedOut: { $not: "$crossedOut" } } }, (err, res) => {
+//     if (err) throw err;
+//     console.log(res);
+//   })
+// }
 
 module.exports = {
   getTodos,
@@ -100,5 +94,5 @@ module.exports = {
   createTodo,
   deleteTodo,
   updateTodo,
-  crossOutTodo,
+  // crossOutTodo,
 }

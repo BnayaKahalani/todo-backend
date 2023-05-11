@@ -6,6 +6,7 @@ const todoRoutes = require('./routes/todos')
 const userRoutes = require('./routes/user')
 
 const app = express()
+mongoose.set('strictQuery', true);
 
 app.use(express.json())
 app.use(cors())
