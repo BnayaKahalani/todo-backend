@@ -68,8 +68,6 @@ const deleteTodo = async (req, res) => {
 const updateTodo = async (req, res) => {
   const { id } = req.params
 
-  console.log('req.body:', req.body)
-
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: 'Not valid ID' })
   }
@@ -79,14 +77,6 @@ const updateTodo = async (req, res) => {
   res.status(200).json(updatedTodo)
 }
 
-// const crossOutTodo = async (req, res) => {
-//   const { id } = req.params
-
-//   Todo.updateOne({ _id: id }, { $set: { crossedOut: { $not: "$crossedOut" } } }, (err, res) => {
-//     if (err) throw err;
-//     console.log(res);
-//   })
-// }
 
 module.exports = {
   getTodos,
@@ -94,5 +84,4 @@ module.exports = {
   createTodo,
   deleteTodo,
   updateTodo,
-  // crossOutTodo,
 }

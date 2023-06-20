@@ -7,6 +7,6 @@ router.post('/login', loginUser)
 
 router.post('/signup', signupUser)
 
-router.post('/user-settings',)
+// router.post('/user-settings',)
 
 module.exports = router

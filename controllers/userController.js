@@ -1,5 +1,5 @@
 const User = require('../models/userModel')
-const UserSetting = require('../models/userSettingModel')
+// const UserSetting = require('../models/userSettingModel')
 const jwt = require('jsonwebtoken')
 
 const createToken = (_id) => {
@@ -8,7 +8,8 @@ const createToken = (_id) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body
-
+  console.log({ email })
+  console.log({ password })
   try {
     const user = await User.login(email, password)
 

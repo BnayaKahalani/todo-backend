@@ -5,7 +5,6 @@ const {
   createTodo,
   deleteTodo,
   updateTodo,
-  // crossOutTodo,
 } = require('../controllers/todoController')
 
 const requireAuth = require('../middleware/requireAuth')
@@ -18,7 +17,6 @@ router.get('/:id', getTodo)
 router.post('/', createTodo)
 router.delete('/:id', deleteTodo)
 router.put('/:id', updateTodo)
-// router.patch('/:id', crossOutTodo)
 
 module.exports = router
 
