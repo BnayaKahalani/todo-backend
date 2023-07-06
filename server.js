@@ -7,15 +7,14 @@ const todoRoutes = require('./routes/todos')
 const userRoutes = require('./routes/user')
 
 const app = express()
+
+const port = process.env.PORT || 4000
+
 mongoose.set('strictQuery', true);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, 'public')))
+  app.use(express.static('public'));
 } else {
-  // const corsOptions = {
-  //   origin: ['http://localhost:5174', 'http://127.0.0.1:5174', 'http://127.0.0.1:8080', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000'],
-  //   credentials: true
-  // }
   app.use(cors())
 }
 
@@ -31,8 +30,8 @@ app.use('/api/user', userRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(process.env.PORT || 4000, () => {
-      console.log('Connected to db & listening on port', process.env.PORT)
+    app.listen(port, () => {
+      console.log('Connected to db & listening on port:', port)
     })
   })
   .catch((error) => {
